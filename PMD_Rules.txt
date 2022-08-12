@@ -1,0 +1,102 @@
+https://pmd.github.io/latest/pmd_rules_java_bestpractices.html
+
+
+
+ShortClassName: Short Classnames with fewer than e.g. five characters are not recommended.
+ShortMethodName: Method names that are very short are not helpful to the reader.
+ShortVariable: Fields, local variables, or parameter names that are very short are not helpful to the reader.
+UnnecessaryImport: Reports import statements that can be removed. 
+UnnecessaryModifier: Fields in interfaces and annotations are automatically ‘public static final’
+UnnecessaryReturn: Avoid the use of unnecessary return statements.
+UselessParentheses: Useless parentheses should be removed.
+AvoidDeeplyNestedIfStmts: Avoid creating deeply nested if-then statements since they are harder to read and error-prone.
+CyclomaticComplexity: The complexity of methods directly affects maintenance costs and readability.
+ExcessiveMethodLength:When methods are excessively long this usually indicates that the method is doing more than its name/signature might suggest. They also become challenging for others to digest since excessive scrolling causes readers to lose focus. Try to reduce the method length by creating helper methods and removing any copy/pasted code.
+ExcessiveParameterList:Methods with numerous parameters are a challenge to maintain, especially if most of them share the same datatype. These situations usually denote the need for new objects to wrap the numerous parameters.
+
+public void addPerson(      // too many arguments liable to be mixed up
+    int birthYear, int birthMonth, int birthDate, int height, int weight, int ssn) {
+
+    . . . .
+}
+
+public void addPerson(      // preferred approach
+    Date birthdate, BodyMeasurements measurements, int ssn) {
+
+    . . . .
+}
+ExcessivePublicCount:Classes with large numbers of public methods and attributes require disproportionate testing efforts since combinational side effects grow rapidly and increase risk. Refactoring these classes into smaller ones not only increases testability and reliability but also allows new variations to be developed easily.
+public class Foo {
+    public String value;
+    public Bar something;
+    public Variable var;
+    // [... more more public attributes ...]
+
+    public void doWork() {}
+    public void doMoreWork() {}
+    public void doWorkAgain() {}
+    // [... more more public methods ...]
+}
+
+OneDeclarationPerLine:Java allows the use of several variables declaration of the same type on one line. However, it can lead to quite messy code. This rule looks for several declarations on the same line.
+PositionLiteralsFirstInComparisons:Position literals first in comparisons, if the second argument is null then NullPointerExceptions can be avoided, they will just return false.
+class Foo {
+  boolean bar(String x) {
+    return x.equals("2"); // should be "2".equals(x)
+  }
+}
+
+SwitchStmtsShouldHaveDefault:Switch statements should be exhaustive, to make their control flow easier to follow. This can be achieved by adding a default case, or, if the switch is on an enum type, by ensuring there is one switch branch for each enum constant.
+class Foo {{
+    int x = 2;
+    switch (x) {
+      case 1: int j = 6;
+      case 2: int j = 8;
+      // missing default: here
+    }
+}}
+UnusedAssignment:Reports assignments to variables that are never used before the variable is overwritten, or goes out of scope. Unused assignments are those for which
+
+The variable is never read after the assignment, or
+The assigned value is always overwritten by other assignments before the next read of the variable.
+AvoidCatchingThrowable:Catching Throwable errors is not recommended since its scope is very broad. It includes runtime issues such as OutOfMemoryError that should be exposed and managed separately.
+
+AvoidDuplicateLiterals:Code containing duplicate String literals can usually be improved by declaring the String as a constant field.
+private void bar() {
+     buz("Howdy");
+     buz("Howdy");
+     buz("Howdy");
+     buz("Howdy");
+}
+private void buz(String x) {}
+
+AvoidFieldNameMatchingMethodName:It can be confusing to have a field name with the same name as a method. While this is permitted, having information (field) and actions (method) is not clear naming. 
+
+public class Foo {
+    Object bar;
+    // bar is data or an action or both?
+    void bar() {
+    }
+}
+
+AvoidMultipleUnaryOperators:The use of multiple unary operators may be problematic, and/or confusing. Ensure that the intended usage is not a bug, or consider simplifying the expression.
+// These are typo bugs, or at best needlessly complex and confusing:
+int i = - -1;
+int j = + - +1;
+int z = ~~2;
+boolean b = !!true;
+boolean c = !!!true;
+
+// These are better:
+int i = 1;
+int j = -1;
+int z = 2;
+boolean b = true;
+boolean c = false;
+
+// And these just make your brain hurt:
+int i = ~-2;
+int j = -~7;
+
+
+
